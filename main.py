@@ -3,13 +3,20 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+user_credentials = { "username": "", "password": "" }
+
 class Credentials(BaseModel):
     username: str
     password: str
 
 @app.post("/login")
 def login(data: Credentials):
-    return {
-        "username": data.username,
-        "password": data.password
-    }
+
+    user_credentials["username"] = data.username
+    user_credentials["password"] = data.password
+
+    print("Saved credentials in cache:")
+    print(user_credentials)
+
+    return { "success": True }
+    
