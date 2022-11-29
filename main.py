@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from instagrapi import Client
 
 app = FastAPI()
 
@@ -19,4 +20,17 @@ def login(data: Credentials):
     print(user_credentials)
 
     return { "success": True }
-    
+
+@app.post("/upload_reel")
+def upload_reel():
+
+    client = Client()
+    client.login(user_credentials["username"], user_credentials["password"])
+
+    try:
+        client.clip_upload("./reel.mp4", "Sample reel upload")
+        return { "success": True }
+
+    except Exception as e:
+        print(f"Failed: {e}")
+        return { "success": False }
