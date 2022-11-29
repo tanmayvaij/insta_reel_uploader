@@ -25,9 +25,9 @@ def login(data: Credentials):
 def upload_reel():
 
     client = Client()
-    client.login(user_credentials["username"], user_credentials["password"])
-
+    
     try:
+        client.login("tony_bot_224", "tejomay123")
         client.clip_upload("./reel.mp4", "Sample reel upload")
         return { "success": True }
 
