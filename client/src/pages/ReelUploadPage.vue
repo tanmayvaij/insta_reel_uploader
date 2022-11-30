@@ -4,7 +4,6 @@
 
       <q-uploader
         accept="video/mp4,video/x-m4v,video/*"
-        auto-upload
         url="http://127.0.0.1:5000/upload"
         :headers="[
           { name: 'username', value: username },
