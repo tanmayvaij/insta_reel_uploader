@@ -1,9 +1,20 @@
+const isUsername = () => {
+  if(localStorage.getItem("username")) return true
+  return false
+}
+
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      {
+        path: '',
+        component: () => {
+          if (isUsername()==true) return import('pages/ReelUploadPage.vue')
+          return import('pages/IndexPage.vue')
+        }
+      }
     ]
   },
 
