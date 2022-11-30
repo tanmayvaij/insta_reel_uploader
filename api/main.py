@@ -1,30 +1,26 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from instagrapi import Client
-from fastapi.middleware.cors import CORSMiddleware
+from flask import Flask, request
+from werkzeug import secure_filename
+from flask_cors import CORS
+import os
 
-app = FastAPI()
+app = Flask(__name__)
 
-origins = ["*"]
+# This is necessary because QUploader uses an AJAX request
+# to send the file
+cors = CORS()
+cors.init_app(app, resource={r"/api/*": {"origins": "*"}})
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+@app.route('/upload', methods=['POST'])
+def upload():
+    for fname in request.files:
+        f = request.files.get(fname)
+        print(f)
+        f.save('./uploads/%s' % secure_filename(fname))
 
-@app.post("/upload_reel")
-def upload_reel():
+    return 'Okay!'
 
-    client = Client()
+if __name__ == '__main__':
+    if not os.path.exists('./uploads'):
+        os.mkdir('./uploads')
+    app.run(debug=True)
     
-    try:
-        client.login("tony_bot_224", "tejomay123")
-        client.clip_upload("./reel.mp4", "Sample reel upload")
-        return { "success": True }
-
-    except Exception as e:
-        print(f"Failed: {e}")
-        return { "success": False }
