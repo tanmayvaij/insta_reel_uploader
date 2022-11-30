@@ -7,11 +7,11 @@
       </div>
 
       <div>
-        <q-input v-model="password" placeholder="Enter password" filled :type="isPwd ? 'password' : 'text'">
-          <template v-slot:append>
-            <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
-          </template>
-        </q-input>
+        <q-input v-model="password" filled type="password" placeholder="Enter password" />
+      </div>
+
+      <div  style="margin-top:15px;" class="flex flex-center">
+        <q-btn color="primary" label="Login" @click="sendCred" />
       </div>
 
     </div>
@@ -20,13 +20,26 @@
 
 
 <script>
-import { ref } from 'vue'
-
 export default {
-  setup () {
+  data() {
     return {
-      username: ref(''),
-      isPwd: ref(true)
+      username: "", password: ""
+    }
+  },
+  methods: {
+    async sendCred() {
+      localStorage.setItem("username", this.username)
+      localStorage.setItem("password", this.password)
+      location.reload()
+      // const res = await fetch("http://127.0.0.1:8000/login", {
+      //   method: "POST",
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ username: this.username, password: this.password}),
+      // })
+      // const data = await res.json()
+      // console.log(data)
     }
   }
 }
