@@ -1,6 +1,10 @@
 # Instagram Reel Uploader App
 
-### Simple Application for uploading reels on your instagram account
+### Simple Application for uploading reels on your instagram account. Created using flask, quasar.
+
+<div>
+    <img src="./project.png" />
+</div>
 
 <br/>
 
