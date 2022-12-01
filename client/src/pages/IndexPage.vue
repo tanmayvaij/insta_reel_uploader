@@ -25,6 +25,7 @@ export default {
       sendCred() {
         if (this.username == "" || this.password == "") {
           alert("Enter proper credentials")
+          return 
         }
         localStorage.setItem("username", this.username)
         localStorage.setItem("password", this.password)
