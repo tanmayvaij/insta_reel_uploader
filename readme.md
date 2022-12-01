@@ -10,7 +10,7 @@
 > Step 2 - Install the required packages ( For windows ) 
 
 ```sh
-python3 install -r requirements.txt
+python install -r requirements.txt
 ```
 
 > Step 2 - Install the required packages ( For linux/mac ) 
