@@ -41,7 +41,13 @@ python3 main.py
 npm install
 ```
 
-> Step 6 - Start the Quasar server
+> Step 6 - Install quasar cli ( if not exists )
+
+```sh
+npm install -g @quasar/cli
+```
+
+> Step 7 - Start the Quasar server
 
 ```sh
 quasar dev
